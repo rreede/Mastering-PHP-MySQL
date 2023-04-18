@@ -1,5 +1,13 @@
 <?php
 
+/* SESSIONS */
+
+// Sessions are a way to store information (in variables) to be used across multiple pages.
+
+// ON SERVERS
+
+
+
 
 // WE can pass data throughs urls and forms using $_GET and $_POST superglobals.
 
@@ -7,8 +15,13 @@
 
 if(isset($_POST["submit"])) {
 
-    echo $_POST['name'];
-    echo $_POST['age'];
+   $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
+
+
+   $age = htmlspecialchars($_POST['age']);
+
+   echo $name;
+   echo $age;
 
 }
 
@@ -23,9 +36,8 @@ if(isset($_POST["submit"])) {
     <title>Document</title>
 </head>
 <body>
-    <a href="<?php echo $_SERVER['PHP_SELF'];?>?name=rene&age=30">Click</a>
 
-<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
 
 <div>
     <label for="">Name:</label>
@@ -34,8 +46,8 @@ if(isset($_POST["submit"])) {
 </div>
 
 <div>
-    <label for="">Age:</label>
-    <input type="text" name="age">
+    <label for="username">Username:</label>
+    <input type="password" name="password">
     <input name="submit" type="submit" value="submit">
 </div>
 
@@ -43,3 +55,5 @@ if(isset($_POST["submit"])) {
 
 </body>
 </html>
+
+?>
